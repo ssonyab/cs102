@@ -1,16 +1,16 @@
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     """
-    Encrypts plaintext using a Vigenere cipher.
+     Encrypts plaintext using a Vigenere cipher.
 
-    >>> encrypt_vigenere("PYTHON", "A")
-    'PYTHON'
-    >>> encrypt_vigenere("python", "a")
-    'python'
-    >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
-    'LXFOPVEFRNHR'
-    """
+     >>> encrypt_vigenere("PYTHON", "A")
+     'PYTHON'
+     >>> encrypt_vigenere("python", "a")
+     'python'
+     >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
+     'LXFOPVEFRNHR'
+     """
     ciphertext = ""
-    # PUT YOUR CODE HERE
+
     return ciphertext
 
 
