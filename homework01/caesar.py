@@ -25,8 +25,7 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
             elif ord('Z') - shift < i <= ord('Z'):
                 i -= 26
             i += shift
-            i = chr(i)
-            ciphertext += i
+            ciphertext += chr(i)
         else:
             ciphertext += chr(i)
     return ciphertext
@@ -55,8 +54,7 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
             elif ord('A') <= i < ord('A') + shift:
                 i += 26
             i -= shift
-            i = chr(i)
-            plaintext += i
+            plaintext += chr(i)
         else:
             plaintext += chr(i)
     return plaintext
