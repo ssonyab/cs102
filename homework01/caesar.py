@@ -15,21 +15,22 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """
     ciphertext = ""
+
     text = list(plaintext)
     for i in text:
         i = ord(i)
         if i >= ord('a') and i <= ord('z') or i >= ord('A') and i <= ord('Z'):
-            if i > ord('z') - shift and i <= ord('z'):
+            if  ord('z') - shift < i <= ord('z'):
                 i -= 26
-            elif i > ord('Z') - shift and i <= ord('Z'):
+            elif ord('Z') - shift < i <= ord('Z'):
                 i -= 26
             i += shift
             i = chr(i)
             ciphertext += i
         else:
-            i = chr(i)
-            ciphertext += i
+            ciphertext += chr(i)
     return ciphertext
+
 
 def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     """
@@ -49,17 +50,17 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     for i in text:
         i = ord(i)
         if i >= ord('a') and i <= ord('z') or i >= ord('A') and i <= ord('Z'):
-            if i < ord('a') + shift and i >= ord('a'):
+            if ord('a') <= i < ord('a') + shift:
                 i += 26
-            elif i < ord('A') + shift and i >= ord('A'):
+            elif ord('A') <= i < ord('A') + shift:
                 i += 26
             i -= shift
             i = chr(i)
             plaintext += i
         else:
-            i = chr(i)
-            plaintext += i
+            plaintext += chr(i)
     return plaintext
+
 
 def caesar_breaker(ciphertext: str, dictionary: tp.Set[str]) -> int:
     """
