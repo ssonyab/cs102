@@ -18,11 +18,11 @@ def is_prime(n: int) -> bool:
     elif n == 1:
         return False
     else:
+        m = 0
         for i in range(2,n):
-            m = 0
-            if (n % i == 0):
+            if n % i == 0:
                 m += 1
-            elif (m <= 0):
+            elif m <= 0:
                 return True
             else:
                 return False
@@ -53,7 +53,7 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    p, q, x, y, a, b = 1, 0, 0, 1, e, phi
+    m, x, t, y, a, b = 1, 0, 0, 1, e, phi
     while a != 0 and b != 0:
         if a >= b:
             a -= b
