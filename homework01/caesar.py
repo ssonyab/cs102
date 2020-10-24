@@ -19,8 +19,8 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     text = list(plaintext)
     for i in text:
         i = ord(i)
-        if i >= ord('a') and i <= ord('z') or i >= ord('A') and i <= ord('Z'):
-            if  ord('z') - shift < i <= ord('z'):
+        if ord('a') <= i <= ord('z') or  ord('A') <= i <= ord('Z'):
+            if ord('z') - shift < i <= ord('z'):
                 i -= 26
             elif ord('Z') - shift < i <= ord('Z'):
                 i -= 26
@@ -48,7 +48,7 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     text = list(ciphertext)
     for i in text:
         i = ord(i)
-        if i >= ord('a') and i <= ord('z') or i >= ord('A') and i <= ord('Z'):
+        if ord('a') >= i <= ord('z') or ord('A') >= i <= ord('Z'):
             if ord('a') <= i < ord('a') + shift:
                 i += 26
             elif ord('A') <= i < ord('A') + shift:
