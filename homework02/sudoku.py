@@ -34,7 +34,7 @@ def group(values: List[str], n: int) -> List[List[str]]:
         for j in range(n):
             little_list.append([values[j]])
         result.append(little_list)
-    values = values[n]:
+    values = values[n:]
     return result
 
 
@@ -90,7 +90,7 @@ def get_block(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
         col_num = 6
     for i in range(len(line_list)):
         for m in range(col_num:col_num + 3):
-            get_block.append[i][m]
+        get_block.append[i][m]
     return get_block
 
 
