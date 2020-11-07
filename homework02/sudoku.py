@@ -90,7 +90,6 @@ def get_block(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
         col_num = 6
     for i in range(len(line_list)):
         for m in range(col_num,col_num + 3):
-
         get_block.append(line_list[i][m])
     return get_block
 
@@ -149,7 +148,7 @@ def solve(grid: List[List[str]]) -> Optional[List[List[str]]]:
     if not free:
         return grid
 
-    for value in find_possible_values(grid, pos):
+    for value in find_possible_values(grid,pos):
         row, col = pos
         grid[row][col] = value
 
@@ -157,7 +156,7 @@ def solve(grid: List[List[str]]) -> Optional[List[List[str]]]:
             return grid
 
         grid[row][col] = "."
-    return none
+    return None
 
 
 def check_solution(solution: List[List[str]]) -> bool:
