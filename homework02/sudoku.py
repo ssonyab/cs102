@@ -16,7 +16,8 @@ def display(grid: List[List[str]]) -> None:
     for row in range(9):
         print(
             "".join(
-                grid[row][col].center(width) + ("|" if str(col) in "25" else "") for col in range(9)
+                grid[row][col].center(width) + ("|" if str(col) in "25" else "")
+                for col in range(9)
             )
         )
         if str(row) in "25":
@@ -172,7 +173,9 @@ def check_solution(solution: List[List[str]]) -> bool:
             if (
                 set(get_block(solution, pos))
                 and set(get_row(solution, pos))
-                and set(get_col(solution, pos)) != {"1", "2", "3", "4", "5", "6", "7", "8", "9"}
+                and set(get_col(solution, pos))
+
+                != {"1", "2", "3", "4", "5", "6", "7", "8", "9"}
             ):
                 return False
     return True
