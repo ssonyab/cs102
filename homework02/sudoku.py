@@ -174,7 +174,6 @@ def check_solution(solution: List[List[str]]) -> bool:
                 set(get_block(solution, pos))
                 and set(get_row(solution, pos))
                 and set(get_col(solution, pos))
-
                 != {"1", "2", "3", "4", "5", "6", "7", "8", "9"}
             ):
                 return False
