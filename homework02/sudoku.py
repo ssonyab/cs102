@@ -203,7 +203,7 @@ def generate_sudoku(N: int) -> List[List[str]]:
     True
     """
     grid = [["."] * 9 for i in range(9)]
-    grid = solve(grid) #type: ignore
+    grid = solve(grid) 
 
     all = 81
     while all > N:
