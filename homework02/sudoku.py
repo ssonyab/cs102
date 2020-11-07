@@ -2,7 +2,6 @@ import random
 from typing import List, Optional, Set, Tuple
 
 
-
 def read_sudoku(filename: str) -> List[List[str]]:
     """ Прочитать Судоку из указанного файла """
     digits = [c for c in open(filename).read() if c in "123456789."]
@@ -202,7 +201,7 @@ def generate_sudoku(N: int) -> List[List[str]]:
     True
     """
     grid = [["."] * 9 for i in range(9)]
-    grid = solve(grid)  # type: ignore
+    grid = solve(grid)
 
     all = 81
     while all > N:
