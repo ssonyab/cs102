@@ -79,18 +79,19 @@ def get_block(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
         line_num = 0
     elif pos[0] < 6:
         line_num = 3
-    else
+    else:
         line_num = 6
     line_list = grid[line_num:line_num + 3]
     if pos[1] < 3:
         col_num = 0
     elif pos[1] < 6:
         col_num = 3
-    else
+    else:
         col_num = 6
     for i in range(len(line_list)):
-        for m in range(col_num:col_num + 3):
-        get_block.append[i][m]
+        for m in range(col_num,col_num + 3):
+
+        get_block.append(line_list[i][m])
     return get_block
 
 
@@ -109,7 +110,7 @@ def find_empty_positions(grid: List[List[str]]) -> Optional[Tuple[int, int]]:
             return i, row.index(".")
         except ValueError:
             continue
-    return none
+    return None
 
 
 def find_possible_values(grid: List[List[str]], pos: Tuple[int, int]) -> Set[str]:
@@ -123,12 +124,12 @@ def find_possible_values(grid: List[List[str]], pos: Tuple[int, int]) -> Set[str
     >>> values == {'2', '5', '9'}
     True
     """
-return (
+    return (
     {"1", "2", "3", "4", "5", "6", "7", "8", "9"}
     - set(get_block(grid, pos))
     - set(get_row(grid, pos))
     - set(get_col(grid, pos))
-)
+    )
 
 
 def solve(grid: List[List[str]]) -> Optional[List[List[str]]]:
