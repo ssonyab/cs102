@@ -93,7 +93,7 @@ def get_block(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
     else:
         col_num = 6
     return [
-        [grid[i] for i in range(line_num, line_num + 3)][i][j]
+        [grid[i] for i in range(line_num, line_num + 3)][i][m]
         for i in range(3)
         for m in range(col_num, col_num + 3)
     ]
