@@ -158,14 +158,17 @@ def check_solution(solution: List[List[str]]) -> bool:
     # TODO: Add doctests with bad puzzles
     for i in range(9):
         for m in range(9):
-            pos = (i, m)
             if (
-                set(get_row(solution, pos))
-                and set(get_col(solution, pos))
-                and set(get_block(solution, pos))
-                != {"1", "2", "3", "4", "5", "6", "7", "8", "9"}
+                len(set(get_row(solution, (i, m)))) < 9
+                or len(set(get_col(solution, (i, m)))) < 9
+                or solution[i][m] == "."
             ):
                 return False
+    for i in range(0, 6, 3):
+        for m in range(0, 3):
+            if len(set(get_block(solution, (i, m)))) < 9:
+                return False
+
     return True
 
 
