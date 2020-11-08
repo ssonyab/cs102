@@ -86,7 +86,7 @@ def get_block(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
         line_num = 3
     else:
         line_num = 6
-    line_list = grid[line_num: line_num + 3]
+    line_list = grid[line_num : line_num + 3]
     if pos[1] < 3:
         col_num = 0
     elif pos[1] < 6:
@@ -96,8 +96,7 @@ def get_block(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
     for i in range(3):
         for m in range(col_num, col_num + 3):
             luk.append(line_list[i][m])
-            print(i, m, len(line_list),
-            len(line_list[i]))
+            print(i, m, len(line_list), len(line_list[i]))
     return luk
 
 
