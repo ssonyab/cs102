@@ -79,12 +79,23 @@ def get_block(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
     >>> get_block(grid, (8, 8))
     ['2', '8', '.', '.', '.', '5', '.', '7', '9']
     """
-    row = pos[0] // 3
-    col = pos[1] // 3
+    if pos[0] < 3:
+        line_num = 0
+    elif pos[0] < 6:
+        line_num = 3
+    else:
+        line_num = 6
+    line_list = grid[line_num : line_num + 3]
+    if pos[1] < 3:
+        col_num = 0
+    elif pos[1] < 6:
+        col_num = 3
+    else:
+        col_num = 6
     return [
-        grid[3 * row + i][3 * col + j]
-        for i in range(row, row + 3)
-        for j in range(col, col + 3)
+        [grid[i] for i in range(line_num, line_num + 3)][i][j]
+        for i in range(3)
+        for m in range(col_num, col_num + 3)
     ]
 
 
