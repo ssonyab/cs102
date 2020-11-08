@@ -94,7 +94,7 @@ def get_block(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
     else:
         col_num = 6
     for i in range(len(line_list)):
-        for m in range(col_num, col_num + 4):
+        for m in range(col_num, col_num + 3):
             list.append(line_list[i][m])
     return list
 
