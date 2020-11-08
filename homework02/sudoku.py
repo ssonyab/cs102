@@ -85,7 +85,6 @@ def get_block(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
         line_num = 3
     else:
         line_num = 6
-    line_list = grid[line_num : line_num + 3]
     if pos[1] < 3:
         col_num = 0
     elif pos[1] < 6:
