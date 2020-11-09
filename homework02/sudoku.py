@@ -197,12 +197,12 @@ def generate_sudoku(N: int) -> List[List[str]]:
     grid = [["."] * 9 for i in range(9)]
     grid = solve(grid)  # type: ignore
 
-    all = 81
-    while all > N:
+    everyc = 81
+    while everyc > N:
         row, col = random.randint(0, 8), random.randint(0, 8)
         if grid[row][col] != ".":
             grid[row][col] = "."
-            all -= 1
+            everyc -= 1
     return grid
 
 
