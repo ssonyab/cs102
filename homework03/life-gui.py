@@ -28,12 +28,12 @@ class GUI(UI):
                     cell_colour = pygame.Color("green")
                 else:
                     cell_colour = pygame.Color("white")
-                kvadr = pygame.Rect(
-                    m * self.cell_size,
-                    i * self.cell_size,
-                    self.cell_size,
-                    self.cell_size,
-                )
+                    kvadr = pygame.Rect(
+                        m * self.cell_size,
+                        i * self.cell_size,
+                        self.cell_size,
+                        self.cell_size,
+                    )
                 pygame.draw.rect(self.screen, cell_colour, kvadr)
 
     def change_state(self, cell: life.Cell) -> None:
@@ -46,7 +46,7 @@ class GUI(UI):
 
     def run(self) -> None:
         pygame.init()
-        watch = pygame.time.Watch()
+        clock = pygame.time.Clock()
         pygame.display.set_caption("Game of Life")
         self.screen.fill(pygame.Color("white"))
 
@@ -62,7 +62,7 @@ class GUI(UI):
                     self.draw_grid()
                     self.draw_lines()
                     pygame.display.flip()
-                    watch.tic(self.speed)
+                    clock.tick(self.speed)
                     continue
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
@@ -78,7 +78,7 @@ class GUI(UI):
                 self.life.step()
 
                 pygame.display.flip()
-                watch.tic(self.speed)
+                clock.tick(self.speed)
             pygame.quit()
 
 
