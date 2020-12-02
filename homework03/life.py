@@ -37,8 +37,7 @@ class GameOfLife:
     def create_grid(self, randomize: bool = False) -> Grid:
         if randomize:
             grid = [
-                [random.randint(0, 1) for n in range(self.cols)]
-                for n in range(self.rows)
+                [random.randint(0, 1) for n in range(self.cols)] for n in range(self.rows)
             ]
         else:
             grid = [[0] * self.cols for n in range(self.rows)]
@@ -135,7 +134,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
