@@ -6,10 +6,11 @@ import pathlib
 from itertools import product
 from typing import List, Optional, Tuple
 
-# pylint: disable=no-member
-# pylint: disable=missing-class-docstring
 # pylint: disable=missing-module-docstring
 # pylint: disable=missing-function-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=unused-wildcard-import
+
 
 Cell = Tuple[int, int]
 Cells = List[int]
@@ -21,7 +22,7 @@ class GameOfLife:
         self,
         size: Tuple[int, int],
         randomize: bool = True,
-        max_generations: Optional[float] = float("inf"),
+        max_generations: float = float("inf"),
     ) -> None:
         # Размер клеточного поля
         self.rows, self.cols = size
@@ -68,25 +69,25 @@ class GameOfLife:
         return out
 
     def step(self) -> None:
-        """
-        Выполнить один шаг игры.
-        """
+
+        # Выполнить один шаг игры.
+
         self.prev_generation = deepcopy(self.curr_generation)
         self.curr_generation = self.get_next_generation()
         self.generations += 1
 
     @property
     def is_max_generations_exceeded(self) -> bool:
-        """
-        Не превысило ли текущее число поколений максимально допустимое.
-        """
+
+        # Не превысило ли текущее число поколений максимально допустимое.
+
         return self.generations >= self.max_generations  # type: ignore
 
     @property
     def is_changing(self) -> bool:
-        """
-        Изменилось ли состояние клеток с предыдущего шага.
-        """
+
+        # Изменилось ли состояние клеток с предыдущего шага.
+
         if self.prev_generation != self.curr_generation:
             return True
         else:
@@ -94,9 +95,9 @@ class GameOfLife:
 
     @staticmethod
     def from_file(filename: pathlib.Path) -> "GameOfLife":
-        """
-        Прочитать состояние клеток из указанного файла.
-        """
+
+        # Прочитать состояние клеток из указанного файла.
+
         with open(filename, "r") as l:
             curr_generation = json.load(l)
         size = len(curr_generation), len(curr_generation[0])
@@ -105,9 +106,9 @@ class GameOfLife:
         return game
 
     def save(self, filename: pathlib.Path) -> None:
-        """
-        Сохранить текущее состояние клеток в указанный файл.
-        """
+
+        # Сохранить текущее состояние клеток в указанный файл.
+
         with open(filename, "w") as l:
             json.dump(self.curr_generation, fp=l)
 
