@@ -44,7 +44,7 @@ class GameOfLife:
     def run(self) -> None:
         """ Запустить игру """
         pygame.init()
-        watch = pygame.time.Watch()
+        clock = pygame.time.Clock()
         pygame.display.set_caption("Game of Life")
         self.screen.fill(pygame.Color("white"))
 
@@ -64,7 +64,7 @@ class GameOfLife:
             self.grid = self.get_next_generation()
 
             pygame.display.flip()
-            watch.tick(self.speed)
+            clock.tick(self.speed)
         pygame.quit()
 
     def create_grid(self, randomize: bool = False) -> Grid:
