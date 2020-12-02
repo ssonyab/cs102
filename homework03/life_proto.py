@@ -2,8 +2,8 @@ import random
 import typing as tp
 from copy import deepcopy
 
-import pygame  # type: ignore
-from pygame.locals import *  # type: ignore
+import pygame  #type: ignore
+from pygame.locals import *  #type: ignore
 
 Cell = tp.Tuple[int, int]
 Cells = tp.List[int]
@@ -137,16 +137,9 @@ class GameOfLife:
         return neighb
 
     def get_next_generation(self) -> Grid:
-        """
-        Получить следующее поколение клеток.
-        Returns
-        ----------
-        out : Grid
-            Новое поколение клеток.
-        """
         out = deepcopy(self.grid)
-        for i in range(len(out)):
-            for m in range(len(out)):
+        for i in range(self.cell_height):
+            for m in range(self.cell_width):
                 total = sum(self.get_neighbours((i, m)))
                 if total == 2 and self.grid[i][m] == 1 or total == 3:
                     out[i][m] = 1
