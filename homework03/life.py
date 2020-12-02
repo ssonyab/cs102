@@ -36,7 +36,9 @@ class GameOfLife:
 
     def create_grid(self, randomize: bool = False) -> Grid:
         if randomize:
-            grid = [[random.randint(0, 1) for i in range(self.cols)] for i in range(self.rows)]
+            grid = [
+                [random.randint(0, 1) for i in range(self.cols)] for i in range(self.rows)
+            ]
         else:
             grid = [[0] * self.cols for i in range(self.rows)]
         return grid
@@ -47,9 +49,9 @@ class GameOfLife:
             for m in range(-1, 2):
                 if i == 0 and m == 0:
                     continue
-                if 0 <= cell[0] + i < len(self.curr_generation) and 0 <= cell[1] + m < len(
-                    self.curr_generation[0]
-                ):
+                if 0 <= cell[0] + i < len(self.curr_generation) and 0 <= cell[
+                    1
+                ] + m < len(self.curr_generation[0]):
                     neighb.append(self.curr_generation[cell[0] + i][cell[1] + m])
         return neighb
 
