@@ -6,11 +6,10 @@ import pathlib
 from itertools import product
 from typing import List, Optional, Tuple
 
+# pylint: disable=no-member
+# pylint: disable=missing-class-docstring
 # pylint: disable=missing-module-docstring
 # pylint: disable=missing-function-docstring
-# pylint: disable=missing-class-docstring
-# pylint: disable=unused-wildcard-import
-
 
 Cell = Tuple[int, int]
 Cells = List[int]
@@ -38,31 +37,31 @@ class GameOfLife:
     def create_grid(self, randomize: bool = False) -> Grid:
         if randomize:
             grid = [
-                [random.randint(0, 1) for i in range(self.cols)]
-                for i in range(self.rows)
+                [random.randint(0, 1) for n in range(self.cols)]
+                for n in range(self.rows)
             ]
         else:
-            grid = [[0] * self.cols for i in range(self.rows)]
+            grid = [[0] * self.cols for n in range(self.rows)]
         return grid
 
     def get_neighbours(self, cell: Cell) -> Cells:
-        neighb = []
+        neighbours = []
         for i in range(-1, 2):
-            for m in range(-1, 2):
-                if i == 0 and m == 0:
+            for j in range(-1, 2):
+                if i == 0 and j == 0:
                     continue
                 if 0 <= cell[0] + i < len(self.curr_generation) and 0 <= cell[
                     1
-                ] + m < len(self.curr_generation[0]):
-                    neighb.append(self.curr_generation[cell[0] + i][cell[1] + m])
-        return neighb
+                ] + j < len(self.curr_generation[0]):
+                    neighbours.append(self.curr_generation[cell[0] + i][cell[1] + j])
+        return neighbours
 
     def get_next_generation(self) -> Grid:
         out = deepcopy(self.curr_generation)
         for i in range(len(out)):
-            for m in range(len(out)):
-                total = sum(self.get_neighbours((i, m)))
-                if total == 2 and self.curr_generation[i][m] == 1 or total == 3:
+            for m in range(len(out[i])):
+                plus = sum(self.get_neighbours((i, m)))
+                if plus == 2 and self.curr_generation[i][m] == 1 or plus == 3:
                     out[i][m] = 1
                 else:
                     out[i][m] = 0
@@ -81,7 +80,10 @@ class GameOfLife:
 
         # Не превысило ли текущее число поколений максимально допустимое.
 
-        return self.generations >= self.max_generations  # type: ignore
+        if self.generations <= self.max_generations:
+            return True
+        else:
+            return False
 
     @property
     def is_changing(self) -> bool:
@@ -103,6 +105,7 @@ class GameOfLife:
         size = len(curr_generation), len(curr_generation[0])
         game = GameOfLife(size=size, randomize=False)
         game.curr_generation = curr_generation
+
         return game
 
     def save(self, filename: pathlib.Path) -> None:
@@ -132,3 +135,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
