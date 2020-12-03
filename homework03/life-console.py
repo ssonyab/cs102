@@ -26,7 +26,7 @@ class Console(UI):
                 if self.life.curr_generation[i][m]:
                     bam = "*"
                 else:
-                    bam = ""
+                    bam = " "
                 screen.addch(i, m, bam)
 
     def run(self) -> None:
