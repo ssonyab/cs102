@@ -41,12 +41,12 @@ class GUI(UI):
                 pygame.draw.rect(self.screen, cell_colour, kvadr)
 
     def change_state(self, cell: life.Cell) -> None:
-        cell_x = cell[0] // self.cell_size
-        cell_y = cell[1] // self.cell_size
-        if self.life.curr_generation[cell_x][cell_y]:
-            self.life.curr_generation[cell_x][cell_y] = 0
+        cell_a = cell[0] // self.cell_size
+        cell_b = cell[1] // self.cell_size
+        if self.life.curr_generation[cell_a][cell_b]:
+            self.life.curr_generation[cell_a][cell_b] = 0
         else:
-            self.life.curr_generation[cell_x][cell_y] = 1
+            self.life.curr_generation[cell_a][cell_b] = 1
 
     def run(self) -> None:
         pygame.init()
@@ -61,28 +61,24 @@ class GUI(UI):
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    (cell_x, cell_y) = pygame.mouse.get_pos()
+                    (cell_y, cell_x) = pygame.mouse.get_pos()
                     self.change_state((cell_x, cell_y))
                     self.draw_grid()
                     self.draw_lines()
                     pygame.display.flip()
                     clock.tick(self.speed)
-                    continue
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        if pause:
-                            pause = False
-                        else:
-                            pause = True
-                if not pause:
-                    self.life.step()
+                        pause = not pause
+            if not pause:
+                self.life.step()
 
-                self.draw_grid()
-                self.draw_lines()
+            self.draw_grid()
+            self.draw_lines()
 
-                pygame.display.flip()
-                clock.tick(self.speed)
-            pygame.quit()
+            pygame.display.flip()
+            clock.tick(self.speed)
+        pygame.quit()
 
 
 def main():
