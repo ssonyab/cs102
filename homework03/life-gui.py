@@ -32,12 +32,12 @@ class GUI(UI):
                     cell_colour = pygame.Color("green")
                 else:
                     cell_colour = pygame.Color("white")
-                    kvadr = pygame.Rect(
-                        m * self.cell_size,
-                        i * self.cell_size,
-                        self.cell_size,
-                        self.cell_size,
-                    )
+                kvadr = pygame.Rect(
+                    m * self.cell_size,
+                    i * self.cell_size,
+                    self.cell_size,
+                    self.cell_size,
+                )
                 pygame.draw.rect(self.screen, cell_colour, kvadr)
 
     def change_state(self, cell: life.Cell) -> None:
