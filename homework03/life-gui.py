@@ -60,7 +60,7 @@ class GUI(UI):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                elif event.type == pygame.mousebuttondown:
+                elif event.type == pygame.MOUSEBUTTONDOWN:
                     (cell_x, cell_y) = pygame.mouse.get_pos()
                     self.change_state((cell_x, cell_y))
                     self.draw_grid()
@@ -74,12 +74,11 @@ class GUI(UI):
                             pause = False
                         else:
                             pause = True
-                if pause:
-                    continue
+                if not pause:
+                    self.life.step()
 
                 self.draw_grid()
                 self.draw_lines()
-                self.life.step()
 
                 pygame.display.flip()
                 clock.tick(self.speed)
