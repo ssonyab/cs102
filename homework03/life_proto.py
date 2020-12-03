@@ -61,6 +61,7 @@ class GameOfLife:
             # Отрисовка списка клеток
             self.draw_lines()
             self.draw_grid()
+            self.draw_lines()
             # Выполнение одного шага игры (обновление состояния ячеек)
             self.grid = self.get_next_generation()
 
