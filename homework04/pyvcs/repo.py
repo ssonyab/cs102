@@ -4,58 +4,40 @@ import typing as tp
 
 
 def repo_find(workdir: tp.Union[str, pathlib.Path] = ".") -> pathlib.Path:
-    path = os.path.realpath(path)
-
-    if os.path.isdir(os.path.join(path, ".git")):
-        return GitRepository(path)
-
-    # If we haven't returned, recurse in parent, if w
-    parent = os.path.realpath(os.path.join(path, ".."))
-
-    if parent == path:
-        # Bottom case
-        # os.path.join("/", "..") == "/":
-        # If parent==path, then path is root.
-        if required:
-            raise Exception("No git directory.")
-        else:
-            return None
-
-    # Recursive case
-    return repo_find(parent, required)
+    gitdir_name = os.environ["GIT_DIR"] if "GIT_DIR" in os.environ else ".pyvcs"
+    workdir = pathlib.Path(workdir)
+    while str(workdir.absolute()) != "/":
+        if (workdir / gitdir_name).is_dir():
+            return workdir / gitdir_name
+        workdir = workdir.parent
+    if (workdir / gitdir_name).is_dir():
+        return workdir / gitdir_name
+    raise Exception("Not a git repository")
 
 
 def repo_create(workdir: tp.Union[str, pathlib.Path]) -> pathlib.Path:
-    """Create a new repository at path."""
-
-    repos = GitRepository(path, True)
-
-    # First, we make sure the path either doesn't exist or is an
-    # empty dir.
-
-    if os.path.exists(repos.worktree):
-        if not os.path.isdir(repos.worktree):
-            raise Exception("%s is not a directory!" % path)
-        if os.listdir(repos.worktree):
-            raise Exception("%s is not empty!" % path)
-    else:
-        os.makedirs(repos.worktree)
-
-    assert repos_dir(repos, "branches", mkdir=True)
-    assert repos_dir(repos, "objects", mkdir=True)
-    assert repos_dir(repos, "refs", "tags", mkdir=True)
-    assert repos_dir(repos, "refs", "heads", mkdir=True)
-
-    # .git/description
-    with open(repos_file(repos, "description"), "w") as f:
-        f.write("Unnamed repository; edit this file 'description' to name the repository.\n")
-
-    # .git/HEAD
-    with open(repos_file(repos, "HEAD"), "w") as f:
+    gitdir_name = os.environ["GIT_DIR"] if "GIT_DIR" in os.environ else ".pyvcs"
+    workdir = pathlib.Path(workdir)
+    if workdir.is_file():
+        raise Exception(f"{workdir} is not a directory")
+    (workdir / gitdir_name).mkdir()
+    HEAD = "HEAD"
+    with open(workdir / gitdir_name / HEAD, "w") as f:
         f.write("ref: refs/heads/master\n")
-
-    with open(repos_file(repos, "config"), "w") as f:
-        config = repos_default_config()
-        config.write(f)
-
-    return repos
+    config = "config"
+    with open(workdir / gitdir_name / config, "w") as f:
+        f.write(
+            "[core]\n\trepositoryformatversion = 0\n\tfilemode = true\n\tbare = false\n\tlogallrefupdates = false\n"
+        )
+    description = "description"
+    with open(workdir / gitdir_name / description, "w") as f:
+        f.write("Unnamed pyvcs repository.\n")
+    objects = "objects"
+    (workdir / gitdir_name / objects).mkdir()
+    refs = "refs"
+    (workdir / gitdir_name / refs).mkdir()
+    heads = "heads"
+    (workdir / gitdir_name / refs / heads).mkdir()
+    tags = "tags"
+    (workdir / gitdir_name / refs / tags).mkdir()
+    return workdir / gitdir_name
