@@ -18,9 +18,7 @@ def hash_object(data: bytes, fmt: str, write: bool = False) -> str:
         if not (gitdir / objects / sha[:2]).exists():
             (gitdir / objects / sha[:2]).mkdir()
         with (gitdir / objects / sha[:2] / sha[2:]).open("wb") as file:
-            file.write(
-                zlib.compress((fmt + " " + str(len(data))).encode() + b"\00" + data)
-            )
+            file.write(zlib.compress((fmt + " " + str(len(data))).encode() + b"\00" + data))
     return sha
 
 
@@ -83,9 +81,7 @@ def cat_file(obj_name: str, pretty: bool = True) -> None:
             else:
                 print(f"{tree[0]:06}", "blob", tree[2] + "\t" + tree[1])
 
-            def find_tree_files(
-                tree_sha: str, gitdir: pathlib.Path
-            ) -> tp.List[tp.Tuple[str, str]]:
+            def find_tree_files(tree_sha: str, gitdir: pathlib.Path) -> tp.List[tp.Tuple[str, str]]:
                 tree_files = []
                 _, tree = read_object(tree_sha, gitdir)
                 tree_inputs = read_tree(tree)
