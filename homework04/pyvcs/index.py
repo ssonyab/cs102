@@ -129,9 +129,7 @@ def ls_files(gitdir: pathlib.Path, details: bool = False) -> None:
         if details:
             stage = (entry.flags >> 12) & 3
             print(
-                "{:6o} {} {:}\t{}".format(
-                    entry.mode, entry.sha1.hex(), stage, entry.path
-                )
+                "{:6o} {} {:}\t{}".format(entry.mode, entry.sha1.hex(), stage, entry.path)
             )
         else:
             print(entry.path)
@@ -172,4 +170,3 @@ def update_index(
         for name in sorted(entry.keys()):
             entry_list.append(entry[name])
         write_index(gitdir, entry_list)
-
