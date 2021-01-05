@@ -1,8 +1,8 @@
 import datetime as dt
 import statistics
 import typing as tp
-from dateutil.relativedelta import relativedelta
 
+from dateutil.relativedelta import relativedelta
 from vkapi.friends import get_friends
 
 
@@ -27,4 +27,3 @@ def age_predict(user_id: int) -> tp.Optional[float]:
     if ages == []:
         return None
     return statistics.median(ages)
-
