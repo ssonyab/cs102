@@ -74,10 +74,12 @@ def get_mutual(
             "friends.getMutual",
             params={
                 "source_uid": source_uid,
-                "target_uid": target_uid,
+                "target_uids": ",".join([str(i) for i in target_uids[cursor : cursor + 100]]),  # type: ignore
                 "order": order,
                 "count": count,
                 "offset": offset,
+                "access_token": config.VK_CONFIG["access_token"],
+                "v": config.VK_CONFIG["version"],
             },
         ).json()["response"]
 
